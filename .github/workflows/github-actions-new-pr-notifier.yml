@@ -1,0 +1,26 @@
+name: New PR notifier
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send e-mail
+        uses: dawidd6/action-send-mail@v3.6.0
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          secure: true
+          from: Ilija Tovilo <tovilo.ilija@gmail.com>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "[${{ github.repository }}] ${{ github.event.pull_request.title }}"
+          body: |
+            Hi
+
+            A new pull request was created on [${{ github.repository }}].
+            ${{ github.event.pull_request.html_url }}
+
+            If you don't wish to receive this e-mail remove your address from the "MAIL_TO" secret in the settings of this repository.
