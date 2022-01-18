@@ -1,0 +1,9 @@
+name: New PR notifier
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggered"
